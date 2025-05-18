@@ -58,7 +58,7 @@ This is a backend-only system that provides a comprehensive API for digital wall
 
 1. Clone the repository
    ```
-   git clone https://github.com/yourusername/digital-wallet-system.git
+   git clone https://github.com/SushyanthGIT2004/digital-wallet-system.git
    cd digital-wallet-system
    ```
 
