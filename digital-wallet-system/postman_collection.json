@@ -1,0 +1,486 @@
+{
+  "info": {
+    "name": "Digital Wallet API",
+    "description": "API documentation for the Digital Wallet System",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Authentication",
+      "description": "Authentication endpoints for user registration and login",
+      "item": [
+        {
+          "name": "Register",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "http://localhost:3000/api/auth/register",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "auth", "register"]
+            },
+            "description": "Register a new user with the system",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"testuser\",\n  \"email\": \"test@example.com\",\n  \"password\": \"password123\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "name": "Successful Registration",
+              "originalRequest": {
+                "method": "POST",
+                "url": {
+                  "raw": "http://localhost:3000/api/auth/register"
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"username\": \"testuser\",\n  \"email\": \"test@example.com\",\n  \"password\": \"password123\"\n}"
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true,\n  \"message\": \"Registration successful\",\n  \"user\": {\n    \"id\": 1,\n    \"username\": \"testuser\",\n    \"email\": \"test@example.com\"\n  },\n  \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "Login",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "http://localhost:3000/api/auth/login",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "auth", "login"]
+            },
+            "description": "Login to the system with email and password",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"test@example.com\",\n  \"password\": \"password123\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "name": "Successful Login",
+              "originalRequest": {
+                "method": "POST",
+                "url": {
+                  "raw": "http://localhost:3000/api/auth/login"
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"test@example.com\",\n  \"password\": \"password123\"\n}"
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true,\n  \"message\": \"Login successful\",\n  \"user\": {\n    \"id\": 1,\n    \"username\": \"testuser\",\n    \"email\": \"test@example.com\"\n  },\n  \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...\"\n}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Wallet",
+      "description": "Wallet operations - get balance, deposit, withdraw, transfer",
+      "item": [
+        {
+          "name": "Get Wallet",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "http://localhost:3000/api/wallet",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "wallet"]
+            },
+            "description": "Get wallet details including balance",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ]
+          },
+          "response": [
+            {
+              "name": "Successful Response",
+              "originalRequest": {
+                "method": "GET",
+                "url": {
+                  "raw": "http://localhost:3000/api/wallet"
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true,\n  \"wallet\": {\n    \"id\": 1,\n    \"balance\": 75000,\n    \"currency\": \"INR\",\n    \"isActive\": true\n  }\n}"
+            }
+          ]
+        },
+        {
+          "name": "Deposit",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "http://localhost:3000/api/wallet/deposit",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "wallet", "deposit"]
+            },
+            "description": "Add money to your wallet",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"amount\": 5000\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "name": "Successful Deposit",
+              "originalRequest": {
+                "method": "POST",
+                "url": {
+                  "raw": "http://localhost:3000/api/wallet/deposit"
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"amount\": 5000\n}"
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true,\n  \"message\": \"Amount credited successfully\",\n  \"transaction\": {\n    \"id\": 101,\n    \"type\": \"deposit\",\n    \"amount\": 5000,\n    \"currency\": \"INR\",\n    \"status\": \"completed\",\n    \"createdAt\": \"2023-03-15T13:45:26.789Z\"\n  },\n  \"wallet\": {\n    \"balance\": 80000,\n    \"currency\": \"INR\"\n  }\n}"
+            }
+          ]
+        },
+        {
+          "name": "Withdraw",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "http://localhost:3000/api/wallet/withdraw",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "wallet", "withdraw"]
+            },
+            "description": "Withdraw money from your wallet",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"amount\": 2000\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "name": "Successful Withdrawal",
+              "originalRequest": {
+                "method": "POST",
+                "url": {
+                  "raw": "http://localhost:3000/api/wallet/withdraw"
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"amount\": 2000\n}"
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true,\n  \"message\": \"Amount debited successfully\",\n  \"transaction\": {\n    \"id\": 102,\n    \"type\": \"withdrawal\",\n    \"amount\": 2000,\n    \"currency\": \"INR\",\n    \"status\": \"completed\",\n    \"fraudScore\": 0,\n    \"createdAt\": \"2023-03-15T13:50:15.123Z\"\n  },\n  \"wallet\": {\n    \"balance\": 78000,\n    \"currency\": \"INR\"\n  }\n}"
+            },
+            {
+              "name": "Withdrawal - Fraud Detected",
+              "originalRequest": {
+                "method": "POST",
+                "url": {
+                  "raw": "http://localhost:3000/api/wallet/withdraw"
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"amount\": 50000\n}"
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"message\": \"Transaction flagged for suspicious activity\",\n  \"details\": {\n    \"fraudScore\": 80,\n    \"reasons\": [\n      \"Very large withdrawal amount: ₹50000\",\n      \"Withdrawal of 64.10% of total balance\"\n    ]\n  }\n}"
+            }
+          ]
+        },
+        {
+          "name": "Transfer",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "http://localhost:3000/api/wallet/transfer",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "wallet", "transfer"]
+            },
+            "description": "Transfer money to another user (creates a new user with the email if it doesn't exist)",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"recipientEmail\": \"recipient@example.com\",\n  \"amount\": 1000,\n  \"description\": \"Dinner payment\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "name": "Successful Transfer",
+              "originalRequest": {
+                "method": "POST",
+                "url": {
+                  "raw": "http://localhost:3000/api/wallet/transfer"
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"recipientEmail\": \"recipient@example.com\",\n  \"amount\": 1000,\n  \"description\": \"Dinner payment\"\n}"
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true,\n  \"message\": \"Money sent successfully\",\n  \"transaction\": {\n    \"id\": 103,\n    \"type\": \"transfer\",\n    \"amount\": 1000,\n    \"currency\": \"INR\",\n    \"status\": \"completed\",\n    \"fraudScore\": 0,\n    \"createdAt\": \"2023-03-15T14:02:45.789Z\",\n    \"recipient\": {\n      \"id\": 2,\n      \"username\": \"recipient\"\n    },\n    \"description\": \"Dinner payment\"\n  },\n  \"wallet\": {\n    \"balance\": 77000,\n    \"currency\": \"INR\"\n  }\n}"
+            },
+            {
+              "name": "Transfer - Fraud Detected",
+              "originalRequest": {
+                "method": "POST",
+                "url": {
+                  "raw": "http://localhost:3000/api/wallet/transfer"
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"recipientEmail\": \"recipient@example.com\",\n  \"amount\": 60000,\n  \"description\": \"Large payment\"\n}"
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"message\": \"Transaction flagged for suspicious activity\",\n  \"details\": {\n    \"fraudScore\": 70,\n    \"reasons\": [\n      \"Very large transfer amount: ₹60000\",\n      \"Withdrawal of 77.92% of total balance\"\n    ]\n  }\n}"
+            }
+          ]
+        },
+        {
+          "name": "Get Transactions",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "http://localhost:3000/api/wallet/transactions",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "wallet", "transactions"]
+            },
+            "description": "Get transaction history for the current user",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ]
+          },
+          "response": [
+            {
+              "name": "Successful Response",
+              "originalRequest": {
+                "method": "GET",
+                "url": {
+                  "raw": "http://localhost:3000/api/wallet/transactions"
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true,\n  \"transactions\": [\n    {\n      \"id\": 103,\n      \"type\": \"transfer\",\n      \"amount\": 1000,\n      \"currency\": \"INR\",\n      \"status\": \"completed\",\n      \"createdAt\": \"2023-03-15T14:02:45.789Z\",\n      \"description\": \"Dinner payment\",\n      \"sender\": {\n        \"id\": 1,\n        \"username\": \"testuser\"\n      },\n      \"recipient\": {\n        \"id\": 2,\n        \"username\": \"recipient\"\n      }\n    },\n    {\n      \"id\": 102,\n      \"type\": \"withdrawal\",\n      \"amount\": 2000,\n      \"currency\": \"INR\",\n      \"status\": \"completed\",\n      \"createdAt\": \"2023-03-15T13:50:15.123Z\",\n      \"description\": \"\",\n      \"sender\": {\n        \"id\": 1,\n        \"username\": \"testuser\"\n      }\n    },\n    {\n      \"id\": 101,\n      \"type\": \"deposit\",\n      \"amount\": 5000,\n      \"currency\": \"INR\",\n      \"status\": \"completed\",\n      \"createdAt\": \"2023-03-15T13:45:26.789Z\",\n      \"description\": \"\",\n      \"sender\": {\n        \"id\": 1,\n        \"username\": \"testuser\"\n      }\n    }\n  ]\n}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Admin",
+      "description": "Admin-only endpoints",
+      "item": [
+        {
+          "name": "Get Flagged Transactions",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "http://localhost:3000/api/admin/transactions/flagged",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "admin", "transactions", "flagged"]
+            },
+            "description": "Get transactions flagged for suspicious activity (admin only)",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ]
+          },
+          "response": [
+            {
+              "name": "Successful Response",
+              "originalRequest": {
+                "method": "GET",
+                "url": {
+                  "raw": "http://localhost:3000/api/admin/transactions/flagged"
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true,\n  \"transactions\": [\n    {\n      \"id\": 105,\n      \"type\": \"withdrawal\",\n      \"amount\": 50000,\n      \"currency\": \"INR\",\n      \"status\": \"blocked\",\n      \"fraudScore\": 80,\n      \"flagged\": true,\n      \"flagReason\": \"Large withdrawal\",\n      \"createdAt\": \"2023-03-15T15:10:23.456Z\",\n      \"description\": \"\",\n      \"sender\": {\n        \"id\": 3,\n        \"username\": \"user1\",\n        \"email\": \"user1@example.com\"\n      },\n      \"recipient\": null\n    },\n    {\n      \"id\": 104,\n      \"type\": \"transfer\",\n      \"amount\": 60000,\n      \"currency\": \"INR\",\n      \"status\": \"blocked\",\n      \"fraudScore\": 75,\n      \"flagged\": true,\n      \"flagReason\": \"Suspicious activity\",\n      \"createdAt\": \"2023-03-15T14:40:12.789Z\",\n      \"description\": \"Large payment\",\n      \"sender\": {\n        \"id\": 1,\n        \"username\": \"testuser\",\n        \"email\": \"test@example.com\"\n      },\n      \"recipient\": {\n        \"id\": 2,\n        \"username\": \"recipient\",\n        \"email\": \"recipient@example.com\"\n      }\n    }\n  ]\n}"
+            },
+            {
+              "name": "Access Denied",
+              "originalRequest": {
+                "method": "GET",
+                "url": {
+                  "raw": "http://localhost:3000/api/admin/transactions/flagged"
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"message\": \"Access denied\"\n}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+} 
